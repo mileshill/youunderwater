@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { DiveLogComponent } from './dive-log/dive-log.component';
+import { ContentFilterPipe } from './content-filter.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DiveLogComponent,
+    ContentFilterPipe
   ],
   imports: [
     BrowserModule,
