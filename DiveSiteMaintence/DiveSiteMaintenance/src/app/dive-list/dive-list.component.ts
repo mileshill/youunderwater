@@ -16,6 +16,7 @@ export class DiveListComponent implements OnInit {
   @Input() sites; // passed from AppComponent
   @Output() onAdd = new EventEmitter();
   @Output() onEdit = new EventEmitter<DiveSite>();
+  @Output() onDelete = new EventEmitter<DiveSite>();
 
   add(){
   	this.onAdd.emit(null);
@@ -23,6 +24,10 @@ export class DiveListComponent implements OnInit {
 
   edit(site: DiveSite){
   	this.onEdit.emit(site);
+  }
+
+  delete(site: DiveSite){
+    this.onDelete.emit(site);
   }
 
 
