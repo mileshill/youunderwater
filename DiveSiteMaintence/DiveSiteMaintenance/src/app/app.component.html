@@ -10,9 +10,9 @@
     	(onAdded)="siteAdded($event)" 
     	(onCancel)="navigateTo('list')">
     </add-site-view>
-    <edit-site-view *ngIf="currentView == 'edit'">
+    <edit-site-view *ngIf="currentView == 'edit'"
         [site]="currentSite" 
         (onSaved)="siteSaved($event)" 
-        (onCancel)="navigateTo('list')"
+        (onCancel)="navigateTo('list')">
     </edit-site-view>
 </div>
