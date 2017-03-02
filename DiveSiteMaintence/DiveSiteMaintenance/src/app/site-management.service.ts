@@ -19,8 +19,10 @@ export class SiteManagementService {
 
 
 	addSite(newSite: DiveSite){
-		newSite.id = this._sites.map(s => s.id)
-			.reduce((p, c) => p < c ? c : p) + 1;
+		newSite.id = this._sites.length > 0
+			? this._sites.map(s => s.id)
+				.reduce((p, c) => p < c ? c : p) + 1
+				: 1;
 		this._sites.push(newSite);
 	}
 

@@ -12,11 +12,12 @@ import { SiteManagementService } from './site-management.service';
 export class AppComponent {
 
   title = "Dive Site Maintenance";
-  siteId: number;
-  currentView = 'list';
+  // siteId: number;
+  // currentView = 'list';
   
-  navigateTo(view: string){
-    this.currentView = view;
+  // navigateTo(view: string){
+  //   this.currentView = view;
+  // }
   }
 
   /*
@@ -70,4 +71,4 @@ export class AppComponent {
     this.navigateTo('list');
   }
   */
-}
+

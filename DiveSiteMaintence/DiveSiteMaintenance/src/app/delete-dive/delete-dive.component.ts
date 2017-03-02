@@ -1,31 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DiveSite} from '../dive-site';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { OnChanges } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { SiteManagementService } from '../site-management.service';
 
 @Component({
   selector: 'delete-site-view',
   templateUrl: './delete-dive.component.html',
   styleUrls: ['./delete-dive.component.css']
 })
-export class DeleteDiveComponent implements OnInit {
+export class DeleteDiveComponent implements OnChanges {
+  siteId: number;
+  siteName: string;
+  private parSub; any;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private siteService: SiteManagementService,
+    private route: ActivatedRoute,
+    private router: Router
+    ){
+    this.siteId = this.route.snapshot.params['id'];
+    this.siteName = this.siteService
+      .getSiteById(this.siteId).name;
   }
 
-  @Input() site: DiveSite;
-  @Output() onDeleted = new EventEmitter();
-  @Output() onCancel = new EventEmitter();
-
-  deleted(){
-  	if (this.site.id){
-  		this.onDeleted.emit(null);
-  	}
+  ngOnChanges() {
+    this.siteName = this.siteService
+      .getSiteById(this.siteId).name;
   }
 
-  cancel(){
-  	this.onCancel.emit(null);
-
+  delete(){
+    this.siteService.deleteSite(this.siteId);
+    this.router.navigate(['/list']);
   }
-
 }

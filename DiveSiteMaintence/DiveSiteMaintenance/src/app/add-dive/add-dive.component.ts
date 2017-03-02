@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { SiteManagementService } from '../site-management.service';
 
 @Component({
@@ -13,40 +15,22 @@ export class AddDiveComponent implements OnInit {
   }
 
 
-  /*
-  @Input() siteId: number;
-  @Output() onAdded = new EventEmitter<number>();
-  @Output() onCancel = new EventEmitter();
-  */
-
   @Output() onClosed = new EventEmitter();
   siteName: string;
 
-  // SiteManagementService is injected from AppComponent
-  // Dependency injection has a Parent-Child relation with components
-  constructor(private siteService: SiteManagementService) {
+  constructor(
+    private siteService: SiteManagementService,
+    private router: Router
+    ) {
   }
 
 
-  // Add new site
- add(){
+  add(){
     this.siteService.addSite({id: 0, name: this.siteName});
-    this.onClosed.emit(null);
-  }
-
-  // Cancel addition of new site
-  cancel(){
-    this.onClosed.emit(null);
-  }
-
-
-  /*
-  added(){
-  	this.onAdded.emit(this.siteName);
+    this.router.navigate(['/list']);
   }
 
   cancel(){
-  	this.onCancel.emit(null);
+    this.router.navigate(['/list']);
   }
-  */
 }

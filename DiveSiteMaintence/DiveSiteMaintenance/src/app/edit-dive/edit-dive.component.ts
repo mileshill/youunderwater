@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
- import { SiteManagementService } from '../site-management.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { SiteManagementService } from '../site-management.service';
 
 @Component({
   selector: 'edit-site-view',
@@ -7,40 +9,26 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./edit-dive.component.css']
 })
 export class EditDiveComponent implements OnInit {
+  siteId: number;
+  siteName: string;
+  private parSub: any; 
 
   
   ngOnInit() {
   }
 
-  // Class Vars
-  private _siteId: number;
-  siteName: string; 
-  
-  // INPUT
-  // Handle initialization error
-  @Input() set siteId(id: number){
-    this._siteId = id;
-    this.siteName = this.siteService.getSiteById(id).name;
+  constructor(
+    private siteService: SiteManagementService,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
+    this.siteId = this.route.snapshot.params['id'];
+    this.siteName = this.siteService
+      .getSiteById(this.siteId).name;
   }
-
-  // OUTPUT
-  @Output() onClosed = new EventEmitter();
-
-  // Dependency Injection; 
-  constructor(private siteService: SiteManagementService) {}
-
- 
-  
-
-
 
   save(){
-  	this.siteService.saveSite({id: this._siteId, name: this.siteName });
-    this.onClosed.emit(null);
+  	this.siteService.saveSite({id: this.siteId, name: this.siteName });
+    this.router.navigate(['/list']);
   }
-
-  cancel(){
-  	this.onClosed.emit(null);
-  }
-
 }

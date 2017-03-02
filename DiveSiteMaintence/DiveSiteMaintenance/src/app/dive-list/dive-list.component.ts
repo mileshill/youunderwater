@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { DiveSite } from '../dive-site';
 import { SiteManagementService } from '../site-management.service';
 
@@ -19,7 +20,10 @@ export class DiveListComponent implements OnInit {
   @Output() onEdit = new EventEmitter<number>();
   @Output() onDelete = new EventEmitter<number>();
 
-  constructor(private siteService: SiteManagementService) { 
+  constructor(
+    private siteService: SiteManagementService,
+    private router: Router
+    ) { 
     this.sites = siteService.getAllSites();
   }
 
@@ -28,11 +32,11 @@ export class DiveListComponent implements OnInit {
   }
 
   edit(siteId: number){
-  	this.onEdit.emit(siteId);
+  	this.router.navigate(['/edit', siteId]);
   }
 
   delete(siteId: number){
-    this.onDelete.emit(siteId);
+    this.router.navigate(['/delete',siteId]);
   }
 
 

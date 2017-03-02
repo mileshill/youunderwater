@@ -10,6 +10,8 @@ import { EditDiveComponent } from './edit-dive/edit-dive.component';
 import { DeleteDiveComponent } from './delete-dive/delete-dive.component';
 
 import { SiteManagementService } from './site-management.service';
+import { ActionableDirective } from './actionable.directive';
+import { routingModule } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { SiteManagementService } from './site-management.service';
     DiveListComponent,
     AddDiveComponent,
     EditDiveComponent,
-    DeleteDiveComponent
+    DeleteDiveComponent,
+    ActionableDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routingModule
   ],
   providers: [SiteManagementService],
   bootstrap: [AppComponent]
