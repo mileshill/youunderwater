@@ -1,6 +1,29 @@
 <div class="container-fluid">
     <h1>{{title}}</h1>
     <div [ngSwitch]="currentView">
+    <site-list-view *ngSwitchDefault
+        (onAdd)="navigateTo('add')" 
+        (onEdit)="siteId=$event; navigateTo('edit')"
+        (onDelete)="siteId=$event; navigateTo('delete')">
+    </site-list-view>
+    <add-site-view *ngSwitchCase="'add'"
+        (onClosed)="navigateTo('list')">
+    </add-site-view>
+    <edit-site-view *ngSwitchCase="'edit'"
+        [siteId]="siteId" 
+        (onClosed)="navigateTo('list')">
+    </edit-site-view>
+    <delete-site-view *ngSwitchCase="'delete'"
+        [site]="currentSite"
+        (onDeleted)="siteDeleted($event)"
+        (onCancel)="navigateTo('list')"
+    ></delete-site-view>
+    </div>
+</div>
+<!-- 
+<div class="container-fluid">
+    <h1>{{title}}</h1>
+    <div [ngSwitch]="currentView">
     <site-list-view *ngSwitchCase="'list'"
     	[sites]="sites" 
     	(onAdd)="startAdd()" 
@@ -23,4 +46,4 @@
         (onCancel)="navigateTo('list')"
     ></delete-site-view>
     </div>
-</div>
+</div> -->

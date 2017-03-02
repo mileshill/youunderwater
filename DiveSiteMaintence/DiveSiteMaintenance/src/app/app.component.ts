@@ -1,13 +1,25 @@
 import { Component } from '@angular/core';
 import { DiveSite } from './dive-site';
+import { SiteManagementService } from './site-management.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [SiteManagementService]
 })
 
 export class AppComponent {
+
+  title = "Dive Site Maintenance";
+  siteId: number;
+  currentView = 'list';
+  
+  navigateTo(view: string){
+    this.currentView = view;
+  }
+
+  /*
   title = 'Dive Site Maintenance';
   newSiteId: number;
   currentSite: DiveSite;
@@ -57,4 +69,5 @@ export class AppComponent {
     }
     this.navigateTo('list');
   }
+  */
 }

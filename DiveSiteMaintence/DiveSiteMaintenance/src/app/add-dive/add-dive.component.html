@@ -3,7 +3,7 @@
     <div class="col-sm-6">
         <input #siteNameBox class="form-control input-lg" type="text" 		placeholder="site name"
          	(keyup)="siteName=siteNameBox.value"
-         	(keyup.enter)="added()"
+         	(keyup.enter)="add()"
          	required/>
     </div>
 </div>
@@ -11,7 +11,7 @@
     <div class="col-sm-6">
         <button class="btn btn-success btn" 
         	[disabled]="!siteName"
-        	(click)="added()">
+        	(click)="add()">
             Add
         </button>
         <button class="btn btn-warning btn" (click)="cancel()">

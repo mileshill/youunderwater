@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {DiveSite} from '../dive-site';
+ import { SiteManagementService } from '../site-management.service';
 
 @Component({
   selector: 'edit-site-view',
@@ -8,24 +8,39 @@ import {DiveSite} from '../dive-site';
 })
 export class EditDiveComponent implements OnInit {
 
-  constructor() { }
-
+  
   ngOnInit() {
   }
 
-  @Input() site: DiveSite;
-  @Output() onSaved = new EventEmitter<DiveSite>();
-  @Output() onCancel = new EventEmitter();
+  // Class Vars
+  private _siteId: number;
+  siteName: string; 
+  
+  // INPUT
+  // Handle initialization error
+  @Input() set siteId(id: number){
+    this._siteId = id;
+    this.siteName = this.siteService.getSiteById(id).name;
+  }
+
+  // OUTPUT
+  @Output() onClosed = new EventEmitter();
+
+  // Dependency Injection; 
+  constructor(private siteService: SiteManagementService) {}
+
+ 
+  
 
 
-  saved(){
-  	if (this.site.id){
-  		this.onSaved.emit(this.site);
-  	}
+
+  save(){
+  	this.siteService.saveSite({id: this._siteId, name: this.siteName });
+    this.onClosed.emit(null);
   }
 
   cancel(){
-  	this.onCancel.emit(null);
+  	this.onClosed.emit(null);
   }
 
 }
